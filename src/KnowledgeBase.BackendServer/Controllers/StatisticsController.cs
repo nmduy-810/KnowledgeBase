@@ -24,7 +24,7 @@ namespace KnowledgeBase.BackendServer.Controllers
 
         #region Method
         [HttpGet("monthly-comments")]
-        [ClaimRequirement(FunctionCode.STATISTIC, CommandCode.VIEW)]
+        [ClaimRequirement(FunctionCode.STATISTIC_MONTHLY_COMMENT, CommandCode.VIEW)]
         public async Task<IActionResult> GetMonthlyNewComments(int year)
         {
             var data = await _context.Comments.Where(x => x.CreateDate.Date.Year == year)
@@ -41,7 +41,7 @@ namespace KnowledgeBase.BackendServer.Controllers
         }
         
         [HttpGet("monthly-newkbs")]
-        [ClaimRequirement(FunctionCode.STATISTIC, CommandCode.VIEW)]
+        [ClaimRequirement(FunctionCode.STATISTIC_MONTHLY_NEWKB, CommandCode.VIEW)]
         public async Task<IActionResult> GetMonthlyNewKbs(int year)
         {
             var data = await _context.Knowledges.Where(x => x.CreateDate.Date.Year == year)
@@ -57,7 +57,7 @@ namespace KnowledgeBase.BackendServer.Controllers
         }
         
         [HttpGet("monthly-registers")]
-        [ClaimRequirement(FunctionCode.STATISTIC, CommandCode.VIEW)]
+        [ClaimRequirement(FunctionCode.STATISTIC_MONTHLY_NEWMEMBER, CommandCode.VIEW)]
         public async Task<IActionResult> GetMonthlyNewRegisters(int year)
         {
             var data = await _context.Users.Where(x => x.CreateDate.Date.Year == year)

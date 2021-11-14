@@ -6,6 +6,8 @@ using KnowledgeBase.ViewModels.Contents.Comment;
 using KnowledgeBase.ViewModels.Contents.Report;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
+using KnowledgeBase.BackendServer.Authorization;
+using KnowledgeBase.Utilities.Constants;
 using Microsoft.EntityFrameworkCore;
 
 namespace KnowledgeBase.BackendServer.Controllers
@@ -15,6 +17,7 @@ namespace KnowledgeBase.BackendServer.Controllers
         #region Reports
 
         [HttpGet("{knowledgeId}/reports/filter")]
+        [ClaimRequirement(FunctionCode.CONTENT_REPORT, CommandCode.VIEW)]
         public async Task<IActionResult> GetReportsPaging(int? knowledgeId, string filter, int pageIndex, int pageSize)
         {
             var query = from r in _context.Reports
@@ -53,6 +56,7 @@ namespace KnowledgeBase.BackendServer.Controllers
         }
 
         [HttpGet("{knowledgeId}/reports/{reportId}")]
+        [ClaimRequirement(FunctionCode.CONTENT_REPORT, CommandCode.VIEW)]
         public async Task<IActionResult> GetReportDetail(int reportId)
         {
             var report = await _context.Reports.FindAsync(reportId);
@@ -78,6 +82,7 @@ namespace KnowledgeBase.BackendServer.Controllers
 
         [ApiValidationFilter]
         [HttpPost("{knowledgeId}/reports")]
+        [ClaimRequirement(FunctionCode.CONTENT_REPORT, CommandCode.CREATE)]
         public async Task<IActionResult> PostReport(int knowledgeId, [FromBody] ReportCreateRequest request)
         {
             var report = new Report()
@@ -109,6 +114,7 @@ namespace KnowledgeBase.BackendServer.Controllers
 
         [ApiValidationFilter]
         [HttpPut("{knowledgeId}/reports/{reportId}")]
+        [ClaimRequirement(FunctionCode.CONTENT_REPORT, CommandCode.UPDATE)]
         public async Task<IActionResult> PutReport(int reportId, [FromBody]CommentCreateRequest request)
         {
             var report = await _context.Reports.FindAsync(reportId);
@@ -130,6 +136,7 @@ namespace KnowledgeBase.BackendServer.Controllers
         }
 
         [HttpDelete("{knowledgeId}/reports/{reportId}")]
+        [ClaimRequirement(FunctionCode.CONTENT_REPORT, CommandCode.DELETE)]
         public async Task<IActionResult> DeleteReport(int knowledgeId, int reportId)
         {
             var report = await _context.Reports.FindAsync(reportId);

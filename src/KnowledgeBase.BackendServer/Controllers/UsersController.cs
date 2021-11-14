@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using System.Threading.Tasks;
+using KnowledgeBase.BackendServer.Authorization;
 using KnowledgeBase.BackendServer.Data;
 using KnowledgeBase.BackendServer.Data.Entities;
 using KnowledgeBase.Utilities.Commons;
@@ -42,6 +43,7 @@ namespace KnowledgeBase.BackendServer.Controllers
         #region User
 
         [HttpGet]
+        [ClaimRequirement(FunctionCode.SYSTEM_USER, CommandCode.CREATE)]
         public async Task<IActionResult> GetUsers()
         {
             var users = _userManager.Users;
@@ -62,6 +64,7 @@ namespace KnowledgeBase.BackendServer.Controllers
         }
 
         [HttpGet("{id}")]
+        [ClaimRequirement(FunctionCode.SYSTEM_USER, CommandCode.CREATE)]
         public async Task<IActionResult> GetById(string id)
         {
             var user = await _userManager.FindByIdAsync(id);
@@ -83,6 +86,7 @@ namespace KnowledgeBase.BackendServer.Controllers
         }
 
         [HttpGet("filter")]
+        [ClaimRequirement(FunctionCode.SYSTEM_USER, CommandCode.CREATE)]
         public async Task<IActionResult> GetUsersPaging(string filter, int pageIndex, int pageSize)
         {
             var query = _userManager.Users;
@@ -118,6 +122,8 @@ namespace KnowledgeBase.BackendServer.Controllers
         }
 
         [HttpPost]
+        [ApiValidationFilter]
+        [ClaimRequirement(FunctionCode.SYSTEM_USER, CommandCode.CREATE)]
         public async Task<IActionResult> PostUser(UserCreateRequest request)
         {
             var user = new User()
@@ -142,6 +148,8 @@ namespace KnowledgeBase.BackendServer.Controllers
         }
 
         [HttpPut("{id}")]
+        [ApiValidationFilter]
+        [ClaimRequirement(FunctionCode.SYSTEM_USER, CommandCode.UPDATE)]
         public async Task<IActionResult> PutUser(string id, [FromBody] UserUpdateRequest request)
         {
             var user = await _userManager.FindByIdAsync(id);
@@ -164,6 +172,7 @@ namespace KnowledgeBase.BackendServer.Controllers
         }
 
         [HttpDelete("{id}")]
+        [ClaimRequirement(FunctionCode.SYSTEM_USER, CommandCode.DELETE)]
         public async Task<IActionResult> DeleteUser(string id)
         {
             var user = await _userManager.FindByIdAsync(id);
@@ -199,6 +208,8 @@ namespace KnowledgeBase.BackendServer.Controllers
         #region ChangePassword
 
         [HttpPut("{id}/change-password")]
+        [ApiValidationFilter]
+        [ClaimRequirement(FunctionCode.SYSTEM_USER, CommandCode.UPDATE)]
         public async Task<IActionResult> PutUserPassword(string id, [FromBody] UserPasswordChangeRequest request)
         {
             var user = await _userManager.FindByIdAsync(id);
@@ -220,6 +231,7 @@ namespace KnowledgeBase.BackendServer.Controllers
         #region UserPermission
 
         [HttpGet("{userId}/menu")]
+        [ClaimRequirement(FunctionCode.SYSTEM_USER, CommandCode.VIEW)]
         public async Task<IActionResult> GetMenuByUserPermission(string userId)
         {
             var user = await _userManager.FindByIdAsync(userId);
@@ -252,6 +264,7 @@ namespace KnowledgeBase.BackendServer.Controllers
         #region UserRoles
 
         [HttpGet("{userId}/roles")]
+        [ClaimRequirement(FunctionCode.SYSTEM_USER, CommandCode.VIEW)]
         public async Task<IActionResult> GetUserRoles(string userId)
         {
             var user = await _userManager.FindByIdAsync(userId);
@@ -262,6 +275,8 @@ namespace KnowledgeBase.BackendServer.Controllers
         }
 
         [HttpPost("{userId}/roles")]
+        [ApiValidationFilter]
+        [ClaimRequirement(FunctionCode.SYSTEM_USER, CommandCode.UPDATE)]
         public async Task<IActionResult> PostRolesToUserUser(string userId, [FromBody] RoleAssignRequest request)
         {
             if (request.RoleNames?.Length == 0)
@@ -280,6 +295,7 @@ namespace KnowledgeBase.BackendServer.Controllers
         }
 
         [HttpDelete("{userId}/roles")]
+        [ClaimRequirement(FunctionCode.SYSTEM_USER, CommandCode.DELETE)]
         public async Task<IActionResult> RemoveRolesFromUser(string userId, [FromQuery] RoleAssignRequest request)
         {
             if (request.RoleNames?.Length == 0)

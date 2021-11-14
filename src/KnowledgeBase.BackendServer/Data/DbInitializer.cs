@@ -72,7 +72,7 @@ namespace KnowledgeBase.BackendServer.Data
                     new() { Id = "DASHBOARD", Name = "Thống kê", ParentId = null, SortOrder = 1,Url = "/dashboard",Icon="fa-dashboard" },
                     new() { Id = "CONTENT",Name = "Nội dung",ParentId = null,Url = "/contents",Icon="fa-table" },
                     new() { Id = "CONTENT_CATEGORY",Name = "Danh mục",ParentId ="CONTENT",Url = "/contents/categories"  },
-                    new() { Id = "CONTENT_KNOWLEDGEBASE",Name = "Bài viết",ParentId = "CONTENT",SortOrder = 2,Url = "/content/knowledge-bases",Icon="fa-edit" },
+                    new() { Id = "CONTENT_KNOWLEDGE",Name = "Bài viết",ParentId = "CONTENT",SortOrder = 2,Url = "/content/knowledge",Icon="fa-edit" },
                     new() { Id = "CONTENT_COMMENT",Name = "Trang",ParentId = "CONTENT",SortOrder = 3,Url = "/contents/comments",Icon="fa-edit" },
                     new() { Id = "CONTENT_REPORT",Name = "Báo xấu",ParentId = "CONTENT",SortOrder = 3,Url = "/contents/reports",Icon="fa-edit" },
                     new() { Id = "STATISTIC",Name = "Thống kê", ParentId = null, Url = "/statistics",Icon="fa-bar-chart-o" },

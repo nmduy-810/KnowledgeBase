@@ -1,8 +1,10 @@
 using System.Linq;
 using System.Threading.Tasks;
+using KnowledgeBase.BackendServer.Authorization;
 using KnowledgeBase.BackendServer.Data;
 using KnowledgeBase.BackendServer.Data.Entities;
 using KnowledgeBase.Utilities.Commons;
+using KnowledgeBase.Utilities.Constants;
 using KnowledgeBase.Utilities.Helpers;
 using KnowledgeBase.ViewModels.Contents.Category;
 using Microsoft.AspNetCore.Mvc;
@@ -28,6 +30,7 @@ namespace KnowledgeBase.BackendServer.Controllers
 
         #region Method
         [HttpGet]
+        [ClaimRequirement(FunctionCode.CONTENT_CATEGORY, CommandCode.VIEW)]
         public async Task<IActionResult> GetCategories()
         {
             var categories = await _context.Categories.ToListAsync();
@@ -44,6 +47,7 @@ namespace KnowledgeBase.BackendServer.Controllers
         }
         
         [HttpGet("{id:int}")]
+        [ClaimRequirement(FunctionCode.CONTENT_CATEGORY, CommandCode.VIEW)]
         public async Task<IActionResult> GetCategoryById(int id)
         {
             var category = await _context.Categories.FindAsync(id);
@@ -65,7 +69,10 @@ namespace KnowledgeBase.BackendServer.Controllers
             return Ok(categoryVm);
         }
         
+        
         [HttpPost]
+        [ApiValidationFilter]
+        [ClaimRequirement(FunctionCode.CONTENT_CATEGORY, CommandCode.CREATE)]
         public async Task<IActionResult> PostCategory(CategoryCreateRequest request)
         {
             var category = new Category()
@@ -90,6 +97,8 @@ namespace KnowledgeBase.BackendServer.Controllers
         }
 
         [HttpPut("{id:int}")]
+        [ApiValidationFilter]
+        [ClaimRequirement(FunctionCode.CONTENT_CATEGORY, CommandCode.UPDATE)]
         public async Task<IActionResult> PutCategory(int id, [FromBody] CategoryUpdateRequest request)
         {
             var category = await _context.Categories.FindAsync(id);
@@ -125,6 +134,7 @@ namespace KnowledgeBase.BackendServer.Controllers
         }
 
         [HttpDelete("{id:int}")]
+        [ClaimRequirement(FunctionCode.CONTENT_CATEGORY, CommandCode.DELETE)]
         public async Task<IActionResult> DeleteCategory(int id)
         {
             var category = await _context.Categories.FindAsync(id);
@@ -155,7 +165,6 @@ namespace KnowledgeBase.BackendServer.Controllers
             _logger.LogInformation(MyLogEvents.DeleteItem,"Delete category is failed");
             return BadRequest(new ApiBadRequestResponse("Delete category failed"));
         }
-        
-        #endregion
+        #endregion Method
     }
 }

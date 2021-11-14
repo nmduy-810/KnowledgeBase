@@ -1,6 +1,8 @@
 using System.Linq;
 using System.Threading.Tasks;
+using KnowledgeBase.BackendServer.Authorization;
 using KnowledgeBase.BackendServer.Data;
+using KnowledgeBase.Utilities.Constants;
 using KnowledgeBase.ViewModels.Statistics;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -22,6 +24,7 @@ namespace KnowledgeBase.BackendServer.Controllers
 
         #region Method
         [HttpGet("monthly-comments")]
+        [ClaimRequirement(FunctionCode.STATISTIC, CommandCode.VIEW)]
         public async Task<IActionResult> GetMonthlyNewComments(int year)
         {
             var data = await _context.Comments.Where(x => x.CreateDate.Date.Year == year)
@@ -38,6 +41,7 @@ namespace KnowledgeBase.BackendServer.Controllers
         }
         
         [HttpGet("monthly-newkbs")]
+        [ClaimRequirement(FunctionCode.STATISTIC, CommandCode.VIEW)]
         public async Task<IActionResult> GetMonthlyNewKbs(int year)
         {
             var data = await _context.Knowledges.Where(x => x.CreateDate.Date.Year == year)
@@ -53,6 +57,7 @@ namespace KnowledgeBase.BackendServer.Controllers
         }
         
         [HttpGet("monthly-registers")]
+        [ClaimRequirement(FunctionCode.STATISTIC, CommandCode.VIEW)]
         public async Task<IActionResult> GetMonthlyNewRegisters(int year)
         {
             var data = await _context.Users.Where(x => x.CreateDate.Date.Year == year)

@@ -28,6 +28,7 @@ namespace KnowledgeBase.BackendServer.Controllers
         }
         
         [HttpPost("{knowledgeId}/votes")]
+        [ApiValidationFilter]
         public async Task<IActionResult> PostVote(int knowledgeId, [FromBody] VoteCreateRequest request)
         {
             var vote = await _context.Votes.FindAsync(knowledgeId, request.UserId);

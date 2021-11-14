@@ -76,6 +76,7 @@ namespace KnowledgeBase.BackendServer.Controllers
             return Ok(reportVm);
         }
 
+        [ApiValidationFilter]
         [HttpPost("{knowledgeId}/reports")]
         public async Task<IActionResult> PostReport(int knowledgeId, [FromBody] ReportCreateRequest request)
         {
@@ -106,6 +107,7 @@ namespace KnowledgeBase.BackendServer.Controllers
             }
         }
 
+        [ApiValidationFilter]
         [HttpPut("{knowledgeId}/reports/{reportId}")]
         public async Task<IActionResult> PutReport(int reportId, [FromBody]CommentCreateRequest request)
         {

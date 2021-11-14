@@ -1,8 +1,10 @@
 using System.Linq;
 using System.Threading.Tasks;
+using KnowledgeBase.BackendServer.Authorization;
 using KnowledgeBase.BackendServer.Data;
 using KnowledgeBase.BackendServer.Data.Entities;
 using KnowledgeBase.Utilities.Commons;
+using KnowledgeBase.Utilities.Constants;
 using KnowledgeBase.Utilities.Helpers;
 using KnowledgeBase.ViewModels.Systems.Command;
 using KnowledgeBase.ViewModels.Systems.CommandInFunction;
@@ -30,6 +32,7 @@ namespace KnowledgeBase.BackendServer.Controllers
 
         #region Method
         [HttpGet]
+        [ClaimRequirement(FunctionCode.SYSTEM_FUNCTION, CommandCode.VIEW)]
         public async Task<IActionResult> GetFunctions()
         {
             var function = _context.Functions;
@@ -52,6 +55,7 @@ namespace KnowledgeBase.BackendServer.Controllers
         }
         
         [HttpGet("{id}")]
+        [ClaimRequirement(FunctionCode.SYSTEM_FUNCTION, CommandCode.VIEW)]
         public async Task<IActionResult> GetFunctionById(string id)
         {
             var function = await _context.Functions.FindAsync(id);
@@ -74,6 +78,8 @@ namespace KnowledgeBase.BackendServer.Controllers
         }
         
         [HttpPost]
+        [ApiValidationFilter]
+        [ClaimRequirement(FunctionCode.SYSTEM_FUNCTION, CommandCode.CREATE)]
         public async Task<IActionResult> PostFunction(FunctionCreateRequest request)
         {
             var dbFunction = await _context.Functions.FindAsync(request.Id);
@@ -106,6 +112,8 @@ namespace KnowledgeBase.BackendServer.Controllers
         }
         
         [HttpPut("{id}")]
+        [ApiValidationFilter]
+        [ClaimRequirement(FunctionCode.SYSTEM_FUNCTION, CommandCode.UPDATE)]
         public async Task<IActionResult> PutFunction(string id, [FromBody] FunctionUpdateRequest request)
         {
             var function = await _context.Functions.FindAsync(id);
@@ -134,6 +142,7 @@ namespace KnowledgeBase.BackendServer.Controllers
         }
         
         [HttpDelete]
+        [ClaimRequirement(FunctionCode.SYSTEM_FUNCTION, CommandCode.UPDATE)]
         public async Task<IActionResult> DeleteFunction(string id)
         {
             var function = await _context.Functions.FindAsync(id);
@@ -167,6 +176,7 @@ namespace KnowledgeBase.BackendServer.Controllers
         }
         
         [HttpGet("{functionId}/commands")]
+        [ClaimRequirement(FunctionCode.SYSTEM_FUNCTION, CommandCode.VIEW)]
         public async Task<IActionResult> GetCommandsInFunction(string functionId)
         {
             var query = from a in _context.Commands
@@ -192,6 +202,7 @@ namespace KnowledgeBase.BackendServer.Controllers
         }
         
         [HttpGet("{functionId}/commands/not-in-function")]
+        [ClaimRequirement(FunctionCode.SYSTEM_FUNCTION, CommandCode.VIEW)]
         public async Task<IActionResult> GetCommandsNotInFunction(string functionId)
         {
             var query = from a in _context.Commands
@@ -217,6 +228,8 @@ namespace KnowledgeBase.BackendServer.Controllers
         }
         
         [HttpPost("{functionId}/commands/")]
+        [ApiValidationFilter]
+        [ClaimRequirement(FunctionCode.SYSTEM_FUNCTION, CommandCode.CREATE)]
         public async Task<IActionResult> PostCommandsInFunction(string functionId, [FromBody] CommandInFunctionCreateRequest request)
         {
             var commandInFunction = await _context.CommandInFunctions.FindAsync(request.CommandId, request.FunctionId);
@@ -245,6 +258,7 @@ namespace KnowledgeBase.BackendServer.Controllers
         }
         
         [HttpDelete("{functionId}/commands/{commandId}")]
+        [ClaimRequirement(FunctionCode.SYSTEM_FUNCTION, CommandCode.DELETE)]
         public async Task<IActionResult> DeleteCommandsInFunction(string functionId, string commandId)
         {
             var commandInFunction = await _context.CommandInFunctions.FindAsync(functionId, commandId);

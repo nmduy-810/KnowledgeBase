@@ -1,7 +1,9 @@
 using System.Linq;
 using System.Threading.Tasks;
+using KnowledgeBase.BackendServer.Authorization;
 using KnowledgeBase.BackendServer.Data.Entities;
 using KnowledgeBase.Utilities.Commons;
+using KnowledgeBase.Utilities.Constants;
 using KnowledgeBase.Utilities.Helpers;
 using KnowledgeBase.ViewModels.Contents.Comment;
 using Microsoft.AspNetCore.Mvc;
@@ -12,6 +14,7 @@ namespace KnowledgeBase.BackendServer.Controllers
     public partial class KnowledgesController
     {
         [HttpGet("{knowledgeId}/comments/filter")]
+        [ClaimRequirement(FunctionCode.CONTENT_COMMENT, CommandCode.VIEW)]
         public async Task<IActionResult> GetCommentsPaging(int? knowledgeId, string filter, int pageIndex, int pageSize)
         {
             var query = from c in _context.Comments
@@ -47,6 +50,7 @@ namespace KnowledgeBase.BackendServer.Controllers
         }
 
         [HttpGet("{knowledgeId}/comments/{commentId}")]
+        [ClaimRequirement(FunctionCode.CONTENT_COMMENT, CommandCode.VIEW)]
         public async Task<IActionResult> GetCommentDetail(int commentId)
         {
             var comment = await _context.Comments.FindAsync(commentId);
@@ -69,6 +73,8 @@ namespace KnowledgeBase.BackendServer.Controllers
         }
 
         [HttpPost("{knowledgeId}/comments")]
+        [ApiValidationFilter]
+        [ClaimRequirement(FunctionCode.CONTENT_COMMENT, CommandCode.CREATE)]
         public async Task<IActionResult> PostComment(int knowledgeId, [FromBody] CommentCreateRequest request)
         {
             var comment = new Comment()
@@ -95,6 +101,8 @@ namespace KnowledgeBase.BackendServer.Controllers
         }
 
         [HttpPut("{knowledgeBaseId}/comments/{commentId}")]
+        [ApiValidationFilter]
+        [ClaimRequirement(FunctionCode.CONTENT_COMMENT, CommandCode.UPDATE)]
         public async Task<IActionResult> PutComment(int commentId, [FromBody]CommentCreateRequest request)
         {
             var comment = await _context.Comments.FindAsync(commentId);
@@ -117,6 +125,7 @@ namespace KnowledgeBase.BackendServer.Controllers
         }
 
         [HttpDelete("{knowledgeId}/comments/{commentId}")]
+        [ClaimRequirement(FunctionCode.CONTENT_COMMENT, CommandCode.DELETE)]
         public async Task<IActionResult> DeleteComment(int knowledgeId, int commentId)
         {
             var comment = await _context.Comments.FindAsync(commentId);

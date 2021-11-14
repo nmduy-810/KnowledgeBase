@@ -8,8 +8,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System.Linq;
 using System.Net.Http.Headers;
+using KnowledgeBase.BackendServer.Authorization;
 using KnowledgeBase.BackendServer.Data.Entities;
 using KnowledgeBase.Utilities.Commons;
+using KnowledgeBase.Utilities.Constants;
 using KnowledgeBase.Utilities.Helpers;
 using KnowledgeBase.ViewModels.Contents.Attachment;
 using Microsoft.AspNetCore.Http;
@@ -39,6 +41,7 @@ namespace KnowledgeBase.BackendServer.Controllers
 
         #region Method
         [HttpGet]
+        [ClaimRequirement(FunctionCode.CONTENT_KNOWLEDGE, CommandCode.VIEW)]
         public async Task<IActionResult> GetKnowledges()
         {
             var knowledges = _context.Knowledges;
@@ -54,6 +57,7 @@ namespace KnowledgeBase.BackendServer.Controllers
         }
         
         [HttpGet("latest/{take:int}")]
+        [ClaimRequirement(FunctionCode.CONTENT_KNOWLEDGE, CommandCode.VIEW)]
         public async Task<IActionResult> GetLatestKnowledges(int take)
         {
             var knowledges = _context.Knowledges
@@ -72,6 +76,7 @@ namespace KnowledgeBase.BackendServer.Controllers
         }
         
         [HttpGet("popular/{take:int}")]
+        [ClaimRequirement(FunctionCode.CONTENT_KNOWLEDGE, CommandCode.VIEW)]
         public async Task<IActionResult> GetPopularKnowledges(int take)
         {
             var knowledges = _context.Knowledges
@@ -91,6 +96,7 @@ namespace KnowledgeBase.BackendServer.Controllers
         }
         
         [HttpGet("filter")]
+        [ClaimRequirement(FunctionCode.CONTENT_KNOWLEDGE, CommandCode.VIEW)]
         public async Task<IActionResult> GetKnowledgesPaging(string filter, int pageIndex, int pageSize)
         {
             var query = from k in _context.Knowledges
@@ -123,6 +129,7 @@ namespace KnowledgeBase.BackendServer.Controllers
         }
         
         [HttpGet("{id}")]
+        [ClaimRequirement(FunctionCode.CONTENT_KNOWLEDGE, CommandCode.VIEW)]
         public async Task<IActionResult> GetById(int id)
         {
             var knowledge = await _context.Knowledges.FindAsync(id);
@@ -148,6 +155,8 @@ namespace KnowledgeBase.BackendServer.Controllers
         
         [HttpPost]
         [Consumes("multipart/form-data")]
+        [ApiValidationFilter]
+        [ClaimRequirement(FunctionCode.CONTENT_KNOWLEDGE, CommandCode.CREATE)]
         public async Task<IActionResult> PostKnowledge([FromForm] KnowledgeCreateRequest request)
         {
             _logger.LogInformation("Begin PostKnowledge API");
@@ -190,6 +199,8 @@ namespace KnowledgeBase.BackendServer.Controllers
         
         [HttpPut("{id}")]
         [Consumes("multipart/form-data")]
+        [ApiValidationFilter]
+        [ClaimRequirement(FunctionCode.CONTENT_KNOWLEDGE, CommandCode.UPDATE)]
         public async Task<IActionResult> PutKnowledge(int id, [FromForm] KnowledgeCreateRequest request)
         {
             var knowledge = await _context.Knowledges.FindAsync(id);
@@ -222,6 +233,7 @@ namespace KnowledgeBase.BackendServer.Controllers
         }
         
         [HttpDelete("{id}")]
+        [ClaimRequirement(FunctionCode.CONTENT_KNOWLEDGE, CommandCode.DELETE)]
         public async Task<IActionResult> DeleteKnowledge(int id)
         {
             var knowledge = await _context.Knowledges.FindAsync(id);

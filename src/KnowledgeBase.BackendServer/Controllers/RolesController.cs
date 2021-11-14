@@ -1,8 +1,10 @@
 using System.Linq;
 using System.Threading.Tasks;
+using KnowledgeBase.BackendServer.Authorization;
 using KnowledgeBase.BackendServer.Data;
 using KnowledgeBase.BackendServer.Data.Entities;
 using KnowledgeBase.Utilities.Commons;
+using KnowledgeBase.Utilities.Constants;
 using KnowledgeBase.Utilities.Helpers;
 using KnowledgeBase.ViewModels.Systems.Permission;
 using KnowledgeBase.ViewModels.Systems.Role;
@@ -32,6 +34,7 @@ namespace KnowledgeBase.BackendServer.Controllers
 
         #region Method
         [HttpGet]
+        [ClaimRequirement(FunctionCode.SYSTEM_ROLE, CommandCode.VIEW)]
         public async Task<IActionResult> GetRoles()
         {
             var roles = _roleManager.Roles;
@@ -45,6 +48,7 @@ namespace KnowledgeBase.BackendServer.Controllers
         }
         
         [HttpGet("{id}")]
+        [ClaimRequirement(FunctionCode.SYSTEM_ROLE, CommandCode.VIEW)]
         public async Task<IActionResult> GetById(string id)
         {
             var role = await _roleManager.FindByIdAsync(id);
@@ -64,6 +68,7 @@ namespace KnowledgeBase.BackendServer.Controllers
         }
         
         [HttpGet("filter")]
+        [ClaimRequirement(FunctionCode.SYSTEM_ROLE, CommandCode.VIEW)]
         public async Task<IActionResult> GetRolesPaging(string filter, int pageIndex, int pageSize)
         {
             var query = _roleManager.Roles;
@@ -90,6 +95,7 @@ namespace KnowledgeBase.BackendServer.Controllers
         }
         
         [HttpGet("{roleId}/permissions")]
+        [ClaimRequirement(FunctionCode.SYSTEM_PERMISSION, CommandCode.VIEW)]
         public async Task<IActionResult> GetPermissionByRoleId(string roleId)
         {
             var permissions = from p in _context.Permissions
@@ -106,6 +112,8 @@ namespace KnowledgeBase.BackendServer.Controllers
         }
             
         [HttpPost]
+        [ApiValidationFilter]
+        [ClaimRequirement(FunctionCode.SYSTEM_ROLE, CommandCode.CREATE)]
         public async Task<IActionResult> PostRole(RoleCreateRequest request)
         {
             var role = new IdentityRole()
@@ -126,6 +134,8 @@ namespace KnowledgeBase.BackendServer.Controllers
         }
         
         [HttpPut("{id}")]
+        [ApiValidationFilter]
+        [ClaimRequirement(FunctionCode.SYSTEM_ROLE, CommandCode.UPDATE)]
         public async Task<IActionResult> PutRole(string id, [FromBody] RoleUpdateRequest request)
         {
             if (id != request.Id)
@@ -156,6 +166,8 @@ namespace KnowledgeBase.BackendServer.Controllers
         }
         
         [HttpPut("{roleId}/permissions")]
+        [ApiValidationFilter]
+        [ClaimRequirement(FunctionCode.SYSTEM_PERMISSION, CommandCode.UPDATE)]
         public async Task<IActionResult> PutPermissionByRoleId(string roleId, [FromBody] PermissionUpdateRequest request)
         {
             //create new permission list from user changed
@@ -178,6 +190,7 @@ namespace KnowledgeBase.BackendServer.Controllers
         }
         
         [HttpDelete]
+        [ClaimRequirement(FunctionCode.SYSTEM_ROLE, CommandCode.DELETE)]
         public async Task<IActionResult> DeleteRole(string id)
         {
             var role = await _roleManager.FindByIdAsync(id);

@@ -12,7 +12,7 @@ namespace KnowledgeBase.BackendServer.Data.Entities
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
-        public int KnowledgeBaseId { get; set; }
+        public int KnowledgeId { get; set; }
         
         [MaxLength(50)]
         [Column(TypeName = "varchar(50)")]

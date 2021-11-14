@@ -1,6 +1,8 @@
 using System;
 using KnowledgeBase.BackendServer.Data;
 using KnowledgeBase.BackendServer.Data.Entities;
+using KnowledgeBase.BackendServer.Services;
+using KnowledgeBase.BackendServer.Services.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -36,6 +38,10 @@ namespace KnowledgeBase.BackendServer
             
             /* 3. Create sample data by db initializer */
             services.AddTransient<DbInitializer>();
+            
+            /* 5. Addition for Knowledge Controller */
+            services.AddTransient<ISequenceService, SequenceService>();
+            services.AddTransient<IStorageService, FileStorageService>();
             
             //4. Configure entity options
             services.Configure<IdentityOptions>(options =>

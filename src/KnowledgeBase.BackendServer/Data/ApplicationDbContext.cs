@@ -1,4 +1,9 @@
+using System;
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 using KnowledgeBase.BackendServer.Data.Entities;
+using KnowledgeBase.BackendServer.Data.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -10,11 +15,30 @@ namespace KnowledgeBase.BackendServer.Data
         public ApplicationDbContext(DbContextOptions options) : base(options)
         {
         }
+        
+        //Custom SaveChangesAsync using auto generated CreateDate and LastModifedDate
+        public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default(CancellationToken))
+        {
+            var modified = ChangeTracker.Entries()
+                .Where(e => e.State == EntityState.Modified || e.State == EntityState.Added);
+            foreach (var item in modified)
+            {
+                if (item.Entity is IDateTracking changedOrAddedItem)
+                {
+                    if (item.State == EntityState.Added)
+                        changedOrAddedItem.CreateDate = DateTime.Now;
+                    else
+                        changedOrAddedItem.LastModifiedDate = DateTime.Now;
+                }
+            }
+            return base.SaveChangesAsync(cancellationToken);
+        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
             
+            //IdentityRole if you don't configure Id with MaxLength, it will automatically generate max length is MAX
             modelBuilder.Entity<IdentityRole>().Property(x => x.Id).HasMaxLength(50).IsUnicode(false);
             modelBuilder.Entity<User>().Property(x => x.Id).HasMaxLength(50).IsUnicode(false);
             modelBuilder.Entity<LabelInKnowledge>().HasKey(x => new { x.KnowledgeId, x.LabelId });
@@ -36,5 +60,6 @@ namespace KnowledgeBase.BackendServer.Data
         public DbSet<LabelInKnowledge> LabelInKnowledges { set; get; }
         public DbSet<Permission> Permissions { get; set; }
         public DbSet<Vote> Votes { set; get; }
+        public DbSet<Report> Reports { get; set; }
     }
 }

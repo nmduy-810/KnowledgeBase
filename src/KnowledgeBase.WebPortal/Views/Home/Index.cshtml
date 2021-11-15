@@ -1,8 +1,382 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
+﻿<div class="container">
+    <!-- SIDEBAR -->
+    <div id="eskimo-sidebar">
+        <div id="eskimo-sidebar-wrapper" class="d-flex align-items-start flex-column h-100 w-100">
+            <!-- LOGO -->
+            <div id="eskimo-logo-cell" class="w-100">
+                <a class="eskimo-logo-link" href="index.html">
+                    <img src="images/logo.png" class="eskimo-logo" alt="eskimo"/>
+                </a>
+            </div>
+            <!-- MENU CONTAINER -->
+            <div id="eskimo-sidebar-cell" class="w-100">
+                <!-- MOBILE MENU BUTTON -->
+                <div id="eskimo-menu-toggle">MENU</div>
+                <!-- MENU -->
+                <nav id="eskimo-main-menu" class="menu-main-menu-container">
+                    <ul class="eskimo-menu-ul">
+                        <li>
+                            <a href="#">Home</a>
+                            <ul class="sub-menu">
+                                <li>
+                                    <a href="index.html">Demo 1</a>
+                                </li>
+                                <li>
+                                    <a href="index2.html">Demo 2</a>
+                                </li>
+                                <li>
+                                    <a href="index3.html">Demo 3</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#">About Me</a>
+                            <ul class="sub-menu">
+                                <li>
+                                    <a href="about.html">Demo 1</a>
+                                </li>
+                                <li>
+                                    <a href="about-2.html">Demo 2</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#">Blog</a>
+                            <ul class="sub-menu">
+                                <li>
+                                    <a href="blog.html">Full Width</a>
+                                </li>
+                                <li>
+                                    <a href="blog-2-column.html">2 Column</a>
+                                </li>
+                                <li>
+                                    <a href="blog-3-column.html">3 Column</a>
+                                </li>
+                                <li>
+                                    <a href="single-post.html">Single Post</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="galleries.html">Galleries</a>
+                        </li>
+                        <li>
+                            <a href="other-features.html">Other Features</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+            <!-- SOCIAL MEDIA ICONS -->
+            <div id="eskimo-social-cell" class="mt-auto w-100">
+                <div id="eskimo-social-inner">
+                    <ul class="eskimo-social-icons">
+                        <li>
+                            <a href="#">
+                                <i class="fa fa-facebook-f"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="fa fa-twitter"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="fa fa-google-plus"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="fa fa-instagram"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="fa fa-vimeo"></i>
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- TOP ICONS -->
+    <ul class="eskimo-top-icons">
+        <li id="eskimo-panel-icon">
+            <a href="#eskimo-panel" class="eskimo-panel-open">
+                <i class="fa fa-bars"></i>
+            </a>
+        </li>
+        <li id="eskimo-search-icon">
+            <a id="eskimo-open-search" href="#">
+                <i class="fa fa-search"></i>
+            </a>
+        </li>
+    </ul>
+    <div class="clearfix"></div>
+    <!-- BLOG POSTS -->
+    <!-- POST 1 -->
+    <div class="card card-horizontal">
+        <div class="card-body">
+            <div class="card-horizontal-left">
+                <div class="card-category">
+                    <a href="category.html">Food &amp; Drink</a>
+                </div>
+                <h3 class="card-title">
+                    <a href="single-post.html">Best and Worst Summer Foods</a>
+                </h3>
+                <div class="card-excerpt">
+                    <p>Admodum comprehenderit id non cillum anim de appellat, ubi tamen singulis sempiternum, occaecat sunt appellat appellat ex varias an in quem laborum an si ita quid multos irure do excepteur culpa quamquam. Nam aliqua iudicem aliquip o sunt cupidatat...</p>
+                </div>
+                <div class="card-horizontal-meta">
+                    <div class="eskimo-author-meta">
+                        By <a class="author-meta" href="author.html">Egemenerd</a>
+                    </div>
+                    <div class="eskimo-date-meta">
+                        <a href="single-post.html">May 22, 2018</a>
+                    </div>
+                    <div class="eskimo-reading-meta">3 min read</div>
+                </div>
+            </div>
+            <div class="card-horizontal-right" data-img="images/1024x680.png">
+                <a class="card-featured-img" href="single-post.html"></a>
+            </div>
+        </div>
+    </div>
+    <!-- POST 2 -->
+    <div class="card card-horizontal">
+        <div class="card-body">
+            <div class="card-horizontal-left">
+                <div class="card-category">
+                    <a href="category.html">Lifestyle</a>
+                </div>
+                <h3 class="card-title">
+                    <a href="single-post.html">What Is Perfect Training?</a>
+                </h3>
+                <div class="card-excerpt">
+                    <p>Non in familiaritatem, esse mentitum deserunt. Sunt excepteur quamquam. Enim ullamco consequat, nisi se singulis non fugiat. Nulla laboris tractavissent, tempor hic illum vidisse. Tempor qui noster incurreret, officia in ingeniis ubi in sunt arbitror ubi...</p>
+                </div>
+                <div class="card-horizontal-meta">
+                    <div class="eskimo-author-meta">
+                        By <a class="author-meta" href="author.html">Egemenerd</a>
+                    </div>
+                    <div class="eskimo-date-meta">
+                        <a href="single-post.html">May 21, 2018</a>
+                    </div>
+                    <div class="eskimo-reading-meta">2 min read</div>
+                </div>
+            </div>
+            <div class="card-horizontal-right" data-img="images/1024x680.png">
+                <a class="card-featured-img" href="single-post.html"></a>
+            </div>
+        </div>
+    </div>
+    <!-- POST 3 -->
+    <div class="card card-horizontal">
+        <div class="card-body">
+            <div class="card-horizontal-left">
+                <div class="card-category">
+                    <a href="category.html">Technology</a>
+                </div>
+                <h3 class="card-title">
+                    <a href="single-post.html">The Best Cameras For Beginners</a>
+                </h3>
+                <div class="card-excerpt">
+                    <p>Pariatur ab enim ita in ne philosophari, cillum incididunt voluptate hic aut quorum vidisse distinguantur, quis possumus cohaerescant, mentitum eruditionem iis aliquip, ubi quem possumus quamquam ea o eiusmod graviterque culpa expetendis ingeniis...</p>
+                </div>
+                <div class="card-horizontal-meta">
+                    <div class="eskimo-author-meta">
+                        By <a class="author-meta" href="author.html">Egemenerd</a>
+                    </div>
+                    <div class="eskimo-date-meta">
+                        <a href="single-post.html">May 20, 2018</a>
+                    </div>
+                    <div class="eskimo-reading-meta">2 min read</div>
+                </div>
+            </div>
+            <div class="card-horizontal-right" data-img="images/1024x680.png">
+                <a class="card-featured-img" href="single-post.html"></a>
+            </div>
+        </div>
+    </div>
+    <!-- POST 4 -->
+    <div class="card card-horizontal">
+        <div class="card-body">
+            <div class="card-horizontal-left">
+                <div class="card-category">
+                    <a href="category.html">TV &amp; Movies</a>
+                </div>
+                <h3 class="card-title">
+                    <a href="single-post.html">The 20 Creepiest Clowns in Movies</a>
+                </h3>
+                <div class="card-excerpt">
+                    <p>Iudicem fidelissimae non appellat aut senserit tamen ad senserit adipisicing, commodo ubi expetendis quo vidisse illum mentitum e ea fore summis dolore quibusdam. Anim litteris nam imitarentur, offendit culpa cillum ingeniis enim, sed varias senserit nostrud vidisse...</p>
+                </div>
+                <div class="card-horizontal-meta">
+                    <div class="eskimo-author-meta">
+                        By <a class="author-meta" href="author.html">Egemenerd</a>
+                    </div>
+                    <div class="eskimo-date-meta">
+                        <a href="single-post.html">May 20, 2018</a>
+                    </div>
+                    <div class="eskimo-reading-meta">3 min read</div>
+                </div>
+            </div>
+            <div class="card-horizontal-right" data-img="images/1024x680.png">
+                <a class="card-featured-img" href="single-post.html"></a>
+            </div>
+        </div>
+    </div>
+    <!-- POST 5 -->
+    <div class="card card-horizontal">
+        <div class="card-body">
+            <div class="card-horizontal-left">
+                <div class="card-category">
+                    <a href="category.html">Travel</a>
+                </div>
+                <h3 class="card-title">
+                    <a href="single-post.html">The Best Places To Travel</a>
+                </h3>
+                <div class="card-excerpt">
+                    <p>Quo aute efflorescere, ita fugiat aliquip. Lorem ad litteris, anim cupidatat ut concursionibus e quae proident hic litteris, de multos adipisicing. Fugiat laboris nam exercitation, arbitror an senserit ubi aut quis lorem id cernantur, ubi minim iudicem nostrud. Minim fidelissimae...</p>
+                </div>
+                <div class="card-horizontal-meta">
+                    <div class="eskimo-author-meta">
+                        By <a class="author-meta" href="author.html">Egemenerd</a>
+                    </div>
+                    <div class="eskimo-date-meta">
+                        <a href="single-post.html">May 20, 2018</a>
+                    </div>
+                    <div class="eskimo-reading-meta">4 min read</div>
+                </div>
+            </div>
+            <div class="card-horizontal-right" data-img="images/1024x680.png">
+                <a class="card-featured-img" href="single-post.html"></a>
+            </div>
+        </div>
+    </div>
+    <!-- VIEW ALL BUTTON -->
+    <div class="eskimo-view-more">
+        <a class="btn btn-default" href="blog.html">VIEW ALL POSTS</a>
+    </div>
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <!-- DIVIDER -->
+    <hr class="section-divider"/>
+
+    <!-- CAROUSEL -->
+    <div class="eskimo-widget-title">
+        <h3 class="eskimo-carousel-title">
+            <span>POPULAR POSTS</span>
+        </h3>
+    </div>
+
+    <div class="eskimo-carousel-container">
+        <div class="eskimo-carousel-view-more">
+            <a href="blog.html">VIEW ALL</a>
+        </div>
+
+        <div id="eskimo-post-carousel" class="eskimo-carousel">
+            <!-- CAROUSEL ITEM 1 -->
+            <div>
+                <div class="card-masonry card-small">
+                    <div class="card">
+                        <a href="single-post.html">
+                            <img class="card-vertical-img" src="images/900x600.png" alt="Ketchup Flavored Ice Cream!"/>
+                        </a>
+                        <div class="card-border">
+                            <div class="card-body">
+                                <div class="card-category">
+                                    <a href="single-post.html">May 28, 2018</a>
+                                </div>
+                                <h5 class="card-title">
+                                    <a href="single-post.html">Ketchup Flavored Ice Cream!</a>
+                                </h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- CAROUSEL ITEM 2 -->
+            <div>
+                <div class="card-masonry card-small">
+                    <div class="card">
+                        <a href="single-post.html">
+                            <img class="card-vertical-img" src="images/900x600.png" alt="Hair You've Always Dreamed Of"/>
+                        </a>
+                        <div class="card-border">
+                            <div class="card-body">
+                                <div class="card-category">
+                                    <a href="single-post.html">May 27, 2018</a>
+                                </div>
+                                <h5 class="card-title">
+                                    <a href="single-post.html">Hair You've Always Dreamed Of</a>
+                                </h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- CAROUSEL ITEM 3 -->
+            <div>
+                <div class="card-masonry card-small">
+                    <div class="card">
+                        <a href="single-post.html">
+                            <img class="card-vertical-img" src="images/900x600.png" alt="15 Of The World's Best Carnivals"/>
+                        </a>
+                        <div class="card-border">
+                            <div class="card-body">
+                                <div class="card-category">
+                                    <a href="single-post.html">May 25, 2018</a>
+                                </div>
+                                <h5 class="card-title">
+                                    <a href="single-post.html">15 Of The World's Best Carnivals</a>
+                                </h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- CAROUSEL ITEM 4 -->
+            <div>
+                <div class="card-masonry card-small">
+                    <div class="card">
+                        <a href="single-post.html">
+                            <img class="card-vertical-img" src="images/900x600.png" alt="5 Ways to a Healthy Lifestyle"/>
+                        </a>
+                        <div class="card-border">
+                            <div class="card-body">
+                                <div class="card-category">
+                                    <a href="single-post.html">May 25, 2018</a>
+                                </div>
+                                <h5 class="card-title">
+                                    <a href="single-post.html">5 Ways to a Healthy Lifestyle</a>
+                                </h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- CAROUSEL ITEM 5 -->
+            <div>
+                <div class="card-masonry card-small">
+                    <div class="card">
+                        <a href="single-post.html">
+                            <img class="card-vertical-img" src="images/900x600.png" alt="Best Breakfast In The World"/>
+                        </a>
+                        <div class="card-border">
+                            <div class="card-body">
+                                <div class="card-category">
+                                    <a href="single-post.html">May 23, 2018</a>
+                                </div>
+                                <h5 class="card-title">
+                                    <a href="single-post.html">Best Breakfast In The World</a>
+                                </h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
